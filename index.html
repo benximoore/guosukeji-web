@@ -1,0 +1,624 @@
+<html lang="zh-CN"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>食农溯源平台 - 国溯科技</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&amp;display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-start: #e8f5e9;
+  --bg-mid: #f1f8f1;
+  --bg-end: #ffffff;
+  --primary: #2e7d32;
+  --primary-dark: #1b5e20;
+  --primary-light: #4caf50;
+  --accent: #43a047;
+  --accent-glow: rgba(76,175,80,0.15);
+  --surface: #ffffff;
+  --surface-alt: #f6faf6;
+  --text-primary: #1a2e1a;
+  --text-secondary: #4a6a4a;
+  --text-muted: #8fa88f;
+  --border: #c8e6c9;
+  --border-light: rgba(200,230,201,0.6);
+  --shadow-sm: 0 1px 4px rgba(46,125,50,0.06);
+  --shadow-md: 0 4px 18px rgba(46,125,50,0.1);
+  --shadow-lg: 0 8px 30px rgba(46,125,50,0.14);
+  --radius: 14px;
+  --radius-sm: 9px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Noto Sans SC', -apple-system, sans-serif;
+  background: linear-gradient(175deg, var(--bg-start) 0%, var(--bg-mid) 30%, rgba(255,255,255,0.85) 60%, rgba(255,255,255,0.7) 100%), url('https://p26-doubao-search-sign.byteimg.com/tos-cn-i-be4g95zd3a/959337579160928297~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1794363186&x-signature=%2Flxbj5nTXSqGQ7YO6ReYtIGawo4%3D');
+  background-size: cover;
+  background-position: center 60%;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  color: var(--text-primary);
+  position: relative;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 有机光晕纹理 */
+body::before {
+  content: '';
+  position: fixed;
+  top: -100px;
+  left: -80px;
+  width: 360px;
+  height: 360px;
+  background: radial-gradient(circle, rgba(76,175,80,0.07) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  bottom: -60px;
+  right: -100px;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(129,199,132,0.08) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 428px;
+  margin: 0 auto;
+  padding: 0 20px;
+  padding-bottom: 40px;
+}
+
+/* 品牌头部 */
+.brand-header {
+  text-align: center;
+  padding: 28px 0 8px;
+}
+
+.brand-icon {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 10px;
+  background: white;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px rgba(46,125,50,0.25);
+  position: relative;
+  overflow: hidden;
+  border: 3px solid var(--primary);
+}
+
+.brand-icon img {
+  max-width: 85%;
+  max-height: 85%;
+  object-fit: contain;
+}
+
+.brand-icon::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 14px;
+  border: 1.5px dashed rgba(76,175,80,0.25);
+}
+
+.brand-icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.company-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--primary-dark);
+  letter-spacing: 1px;
+}
+
+.brand-slogan {
+  font-size: 12px;
+  color: var(--text-muted);
+  letter-spacing: 2px;
+  font-weight: 300;
+  margin-top: 2px;
+}
+
+.divider {
+  width: 32px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  margin: 12px auto;
+  border-radius: 1px;
+}
+
+/* 叶片装饰 */
+.leaf-decor {
+  position: absolute;
+  top: 100px;
+  right: -10px;
+  opacity: 0.06;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* 页面标题 */
+.page-title {
+  text-align: center;
+  margin-bottom: 6px;
+}
+
+.page-title h1 {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: 0.5px;
+}
+
+.page-subtitle {
+  text-align: center;
+  font-size: 11.5px;
+  color: var(--text-secondary);
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+}
+
+.page-subtitle span {
+  display: inline-block;
+  padding: 3px 10px;
+  background: rgba(76,175,80,0.06);
+  border-radius: 20px;
+  border: 1px solid rgba(76,175,80,0.1);
+}
+
+/* 登录卡片 */
+.login-card {
+  position: relative;
+  z-index: 1;
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 22px 20px;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border-light);
+  margin-bottom: 16px;
+}
+
+.form-group {
+  margin-bottom: 14px;
+}
+
+.form-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+  letter-spacing: 0.3px;
+}
+
+.form-input {
+  width: 100%;
+  height: 40px;
+  padding: 0 14px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-family: inherit;
+  color: var(--text-primary);
+  background: var(--surface-alt);
+  transition: all 0.25s ease;
+  outline: none;
+}
+
+.form-input::placeholder {
+  color: var(--text-muted);
+  font-size: 12.5px;
+}
+
+.form-input:focus {
+  border-color: var(--accent);
+  background: #fff;
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+.btn-primary {
+  width: 100%;
+  height: 42px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: inherit;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 12px rgba(46,125,50,0.25);
+  margin-top: 4px;
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+  box-shadow: 0 2px 8px rgba(46,125,50,0.2);
+}
+
+/* 查询结果 */
+.result-section {
+  position: relative;
+  z-index: 1;
+  display: none;
+}
+
+.result-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.result-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 6px rgba(76,175,80,0.4);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.result-title {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.result-card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 16px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-light);
+  margin-bottom: 10px;
+  opacity: 0;
+  animation: fadeUp 0.5s ease forwards;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.result-card-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.result-card-title .icon-wrap {
+  width: 20px;
+  height: 20px;
+  background: rgba(76,175,80,0.08);
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.result-card-title .icon-wrap svg {
+  width: 12px;
+  height: 12px;
+  color: var(--accent);
+}
+
+.result-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 0;
+  font-size: 12.5px;
+}
+
+.result-row:not(:last-child) {
+  border-bottom: 1px solid rgba(200,230,201,0.4);
+}
+
+.result-label {
+  color: var(--text-muted);
+}
+
+.result-value {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.status-badge.ok {
+  background: rgba(22,163,74,0.08);
+  color: #16a34a;
+}
+
+.status-badge.organic {
+  background: rgba(76,175,80,0.1);
+  color: var(--primary);
+}
+
+/* 溯源时间轴 */
+.timeline {
+  padding: 4px 0;
+}
+
+.timeline-item {
+  display: flex;
+  gap: 12px;
+  padding: 8px 0;
+  position: relative;
+}
+
+.timeline-item:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 7px;
+  top: 26px;
+  bottom: -4px;
+  width: 1.5px;
+  background: var(--border);
+}
+
+.timeline-dot {
+  width: 16px;
+  height: 16px;
+  min-width: 16px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 2px solid var(--accent);
+  margin-top: 1px;
+  position: relative;
+}
+
+.timeline-dot.active {
+  background: var(--accent);
+}
+
+.timeline-dot.active::after {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  background: white;
+  border-radius: 50%;
+}
+
+.timeline-content {
+  flex: 1;
+}
+
+.timeline-time {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-bottom: 1px;
+}
+
+.timeline-desc {
+  font-size: 12.5px;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.timeline-loc {
+  font-size: 11px;
+  color: var(--text-secondary);
+  margin-top: 1px;
+}
+
+/* 底部 */
+.footer {
+  text-align: center;
+  padding: 24px 0 16px;
+  position: relative;
+  z-index: 1;
+}
+
+.footer-text {
+  font-size: 10.5px;
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
+  line-height: 1.6;
+}
+
+.footer-brand {
+  font-size: 11px;
+  color: var(--text-secondary);
+  font-weight: 500;
+  margin-top: 4px;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <!-- 品牌头部 -->
+  <div class="brand-header">
+    <!-- 品牌图标已移除 -->
+    <div class="brand-icon-placeholder" style="height: 60px; margin: 0 auto 10px;"></div>
+    <div class="company-name">
+</div>
+    <div class="brand-slogan">
+</div>
+    <div class="divider"></div>
+  </div>
+
+  <!-- 叶片装饰 -->
+  <svg class="leaf-decor" width="120" height="140" viewBox="0 0 120 140" fill="none">
+    <path d="M60 10C30 30 10 70 20 110C30 100 50 85 60 70C70 85 90 100 100 110C110 70 90 30 60 10Z" fill="#2e7d32"></path>
+    <path d="M60 10C60 50 60 80 60 110" stroke="#1b5e20" stroke-width="1.5"></path>
+    <path d="M60 40C45 50 35 65 30 80" stroke="#1b5e20" stroke-width="1" opacity="0.5"></path>
+    <path d="M60 40C75 50 85 65 90 80" stroke="#1b5e20" stroke-width="1" opacity="0.5"></path>
+  </svg>
+
+  <!-- 页面标题 -->
+  <div class="page-title">
+    <h1>食农溯源平台</h1>
+  </div>
+  <div class="page-subtitle">
+    <span>食品 · 农产品 · 全程可追溯</span>
+  </div>
+
+  <!-- 登录卡片 -->
+  <div class="login-card">
+    <div class="form-group">
+      <label class="form-label">账号</label>
+      <input class="form-input" type="text" placeholder="请输入溯源账号">
+    </div>
+    <div class="form-group">
+      <label class="form-label">密码</label>
+      <input class="form-input" type="password" placeholder="请输入密码">
+    </div>
+    <button class="btn-primary" onclick="handleLogin()">登录并查询</button>
+  </div>
+
+  <!-- 查询结果 -->
+  <div class="result-section" id="resultSection">
+    <div class="result-header">
+      <div class="result-dot"></div>
+      <div class="result-title">溯源查询结果</div>
+    </div>
+
+    <div class="result-card" style="animation-delay:0s;">
+      <div class="result-card-title">
+        <span class="icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"></path><circle cx="12" cy="12" r="10"></circle></svg>
+        </span>
+        产品基本信息
+      </div>
+      <div class="result-row">
+        <span class="result-label">产品名称</span>
+        <span class="result-value">有机绿茶 · 特级</span>
+      </div>
+      <div class="result-row">
+        <span class="result-label">溯源编码</span>
+        <span class="result-value">NY-2024-FJ-T00923</span>
+      </div>
+      <div class="result-row">
+        <span class="result-label">有机认证</span>
+        <span class="status-badge organic">有机认证</span>
+      </div>
+      <div class="result-row">
+        <span class="result-label">产地</span>
+        <span class="result-value">福建省安溪县</span>
+      </div>
+    </div>
+
+    <div class="result-card" style="animation-delay:0.12s;">
+      <div class="result-card-title">
+        <span class="icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+        </span>
+        溯源时间轴
+      </div>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot active"></div>
+          <div class="timeline-content">
+            <div class="timeline-time">2024-10-18 09:30</div>
+            <div class="timeline-desc">采摘批次 #A0923</div>
+            <div class="timeline-loc">安溪县龙涓乡茶园</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-time">2024-10-19 14:00</div>
+            <div class="timeline-desc">初加工 · 杀青揉捻</div>
+            <div class="timeline-loc">安溪国溯茶叶加工厂</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-time">2024-10-21 08:15</div>
+            <div class="timeline-desc">质量检测合格 · 包装入库</div>
+            <div class="timeline-loc">安溪国溯茶叶加工厂</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-time">2024-10-23 10:00</div>
+            <div class="timeline-desc">物流出库 · 发往厦门</div>
+            <div class="timeline-loc">泉州物流中心</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="result-card" style="animation-delay:0.24s;">
+      <div class="result-card-title">
+        <span class="icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+        </span>
+        检测报告
+      </div>
+      <div class="result-row">
+        <span class="result-label">农药残留</span>
+        <span class="status-badge ok">未检出</span>
+      </div>
+      <div class="result-row">
+        <span class="result-label">重金属</span>
+        <span class="status-badge ok">合格</span>
+      </div>
+      <div class="result-row">
+        <span class="result-label">检测机构</span>
+        <span class="result-value">福建省农产品质量安全检验检测中心</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 底部 -->
+  <div class="footer">
+    <div class="footer-text">一物一码溯源，守护舌尖安全</div>
+    <div class="footer-brand">福建省国溯科技集团有限公司</div>
+  </div>
+</div>
+
+<script>
+function handleLogin() {
+  const section = document.getElementById('resultSection');
+  section.style.display = 'block';
+
+  const cards = section.querySelectorAll('.result-card');
+  cards.forEach(card => {
+    card.style.animation = 'none';
+    card.offsetHeight;
+    card.style.animation = '';
+  });
+
+  section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+</script>
+
+</body></html>
