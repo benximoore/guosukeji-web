@@ -1,0 +1,525 @@
+<html lang="zh-CN"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>公共安全产品溯源 - 国溯科技</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&amp;family=DM+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-start: #e8f0fe;
+  --bg-end: #ffffff;
+  --primary: #1a5fb4;
+  --primary-dark: #0d3b7a;
+  --primary-light: #3b82f6;
+  --accent: #2d8cf0;
+  --surface: #ffffff;
+  --surface-alt: #f0f5ff;
+  --text-primary: #1a2332;
+  --text-secondary: #5a6b82;
+  --text-muted: #94a3b8;
+  --border: #d4dff0;
+  --shadow-sm: 0 1px 3px rgba(26,95,180,0.08);
+  --shadow-md: 0 4px 16px rgba(26,95,180,0.12);
+  --shadow-lg: 0 8px 32px rgba(26,95,180,0.16);
+  --radius: 12px;
+  --radius-sm: 8px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Noto Sans SC', -apple-system, sans-serif;
+  background: linear-gradient(165deg, var(--bg-start) 0%, var(--bg-end) 50%, #f8fbff 100%);
+  min-height: 100vh;
+  color: var(--text-primary);
+  position: relative;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 科技网格背景 */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(26,95,180,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(26,95,180,0.03) 1px, transparent 1px);
+  background-size: 24px 24px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  top: 50%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('https://p11-doubao-search-sign.byteimg.com/labis/image/f7c5329c2294f81f0f9d3d9044ccf442~tplv-be4g95zd3a-image.jpeg?lk3s=feb11e32&x-expires=1794365253&x-signature=r2sPTZoN0DXYhifsCswZw1OdHdY%3D');
+  background-size: cover;
+  background-position: center 70%;
+  background-repeat: no-repeat;
+  opacity: 0.15;
+  pointer-events: none;
+  z-index: 0;
+  mask-image: linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0));
+  -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0));
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 428px;
+  margin: 0 auto;
+  padding: 60px 20px 40px;
+}
+
+/* 顶部品牌区 */
+.brand-header {
+  text-align: center;
+  padding: 28px 0 8px;
+}
+
+.brand-icon {
+  width: 44px;
+  height: 44px;
+  margin: 0 auto 10px;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+  border: 2px solid var(--primary-dark);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px rgba(26,95,180,0.25);
+  overflow: hidden;
+}
+
+.brand-icon img {
+  width: 36px;
+  height: 36px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.brand-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.company-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--primary-dark);
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+}
+
+.brand-slogan {
+  font-size: 12px;
+  color: var(--text-muted);
+  letter-spacing: 2px;
+  font-weight: 300;
+}
+
+.divider {
+  width: 32px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  margin: 12px auto;
+  border-radius: 1px;
+}
+
+/* 页面标题 */
+.page-title {
+  text-align: center;
+  margin-bottom: 6px;
+}
+
+.page-title h1 {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: 0.5px;
+}
+
+.page-subtitle {
+  text-align: center;
+  font-size: 11.5px;
+  color: var(--text-secondary);
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+}
+
+.page-subtitle span {
+  display: inline-block;
+  padding: 3px 10px;
+  background: rgba(26,95,180,0.06);
+  border-radius: 20px;
+  border: 1px solid rgba(26,95,180,0.08);
+}
+
+/* 科技线路装饰 */
+.tech-lines {
+  position: absolute;
+  top: 160px;
+  left: 0;
+  right: 0;
+  height: 200px;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.4;
+}
+
+/* 登录卡片 */
+.login-card {
+  position: relative;
+  z-index: 1;
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 22px 20px;
+  box-shadow: var(--shadow-md);
+  border: 1px solid rgba(212,223,240,0.6);
+  margin-bottom: 16px;
+}
+
+.form-group {
+  margin-bottom: 14px;
+}
+
+.form-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+  letter-spacing: 0.3px;
+}
+
+.form-input {
+  width: 100%;
+  height: 40px;
+  padding: 0 14px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-family: inherit;
+  color: var(--text-primary);
+  background: var(--surface-alt);
+  transition: all 0.25s ease;
+  outline: none;
+}
+
+.form-input::placeholder {
+  color: var(--text-muted);
+  font-size: 12.5px;
+}
+
+.form-input:focus {
+  border-color: var(--accent);
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(45,140,240,0.1);
+}
+
+.btn-primary {
+  width: 100%;
+  height: 42px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: inherit;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 12px rgba(26,95,180,0.25);
+  margin-top: 4px;
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+  box-shadow: 0 2px 8px rgba(26,95,180,0.2);
+}
+
+/* 查询结果区 */
+.result-section {
+  position: relative;
+  z-index: 1;
+}
+
+.result-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.result-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 6px rgba(45,140,240,0.4);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.result-title {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.result-card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 16px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border);
+  margin-bottom: 10px;
+  opacity: 0;
+  animation: fadeUp 0.5s ease forwards;
+}
+
+.result-card:nth-child(2) { animation-delay: 0.1s; }
+.result-card:nth-child(3) { animation-delay: 0.2s; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.result-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 0;
+  font-size: 12.5px;
+}
+
+.result-row:not(:last-child) {
+  border-bottom: 1px solid rgba(212,223,240,0.4);
+}
+
+.result-label {
+  color: var(--text-muted);
+}
+
+.result-value {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.result-value.status-ok {
+  color: #16a34a;
+}
+
+.result-value.status-warn {
+  color: #f59e0b;
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.status-badge.ok {
+  background: rgba(22,163,74,0.08);
+  color: #16a34a;
+}
+
+.status-badge.warn {
+  background: rgba(245,158,11,0.08);
+  color: #f59e0b;
+}
+
+.result-card-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.result-card-title svg {
+  width: 14px;
+  height: 14px;
+  color: var(--accent);
+}
+
+/* 底部 */
+.footer {
+  text-align: center;
+  padding: 24px 0 16px;
+  position: relative;
+  z-index: 1;
+}
+
+.footer-text {
+  font-size: 10.5px;
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
+  line-height: 1.6;
+}
+
+.footer-brand {
+  font-size: 11px;
+  color: var(--text-secondary);
+  font-weight: 500;
+  margin-top: 4px;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <!-- 品牌头部 -->
+  <div class="brand-header">
+
+    <div class="divider"></div>
+    <!-- 页面标题 -->
+    <div class="page-title">
+      <h1 style="font-size: 24px;">公共安全产品溯源</h1>
+    </div>
+    <div class="company-name">
+</div>
+    <div class="brand-slogan">
+</div>
+  </div>
+
+
+  <!-- 科技线路装饰SVG -->
+  <svg class="tech-lines" viewBox="0 0 400 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 80 H120 L140 60 H220 L240 80 H400" stroke="rgba(45,140,240,0.12)" stroke-width="1"></path>
+    <path d="M0 120 H80 L100 140 H280 L300 120 H400" stroke="rgba(45,140,240,0.08)" stroke-width="1"></path>
+    <path d="M0 160 H160 L180 140 H340 L360 160 H400" stroke="rgba(45,140,240,0.06)" stroke-width="1"></path>
+    <circle cx="120" cy="80" r="2.5" fill="rgba(45,140,240,0.3)"></circle>
+    <circle cx="240" cy="80" r="2.5" fill="rgba(45,140,240,0.3)"></circle>
+    <circle cx="100" cy="140" r="2" fill="rgba(45,140,240,0.2)"></circle>
+    <circle cx="300" cy="120" r="2" fill="rgba(45,140,240,0.2)"></circle>
+  </svg>
+
+  <!-- 登录卡片 -->
+  <div class="login-card">
+    <div class="form-group">
+      <label class="form-label">账号</label>
+      <input class="form-input" type="text" placeholder="请输入溯源账号">
+    </div>
+    <div class="form-group">
+      <label class="form-label">密码</label>
+      <input class="form-input" type="password" placeholder="请输入密码">
+    </div>
+    <button class="btn-primary" onclick="handleLogin()">登录并查询</button>
+  </div>
+
+  <!-- 查询结果区域 -->
+  <div class="result-section" id="resultSection" style="display:none;">
+    <div class="result-header">
+      <div class="result-dot"></div>
+      <div class="result-title">溯源查询结果</div>
+    </div>
+
+    <div class="result-card" style="animation-delay:0s;">
+      <div class="result-card-title">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"></path><circle cx="12" cy="12" r="10"></circle></svg>
+        产品认证信息
+      </div>
+      <div class="result-row">
+        <span class="result-label">认证编号</span>
+        <span class="result-value">CCC-2024-FJ-083721</span>
+      </div>
+      <div class="result-row">
+        <span class="result-label">产品名称</span>
+        <span class="result-value">锂电池组 XT-48V20A</span>
+      </div>
+      <div class="result-row">
+        <span class="result-label">认证状态</span>
+        <span class="status-badge ok">已认证</span>
+      </div>
+    </div>
+
+    <div class="result-card" style="animation-delay:0.12s;">
+      <div class="result-card-title">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M3 9h18"></path><path d="M9 3v18"></path></svg>
+        生产追溯链
+      </div>
+      <div class="result-row">
+        <span class="result-label">生产企业</span>
+        <span class="result-value">福建国溯电子科技有限公司</span>
+      </div>
+      <div class="result-row">
+        <span class="result-label">生产批次</span>
+        <span class="result-value">GS-20240915-A03</span>
+      </div>
+      <div class="result-row">
+        <span class="result-label">生产日期</span>
+        <span class="result-value">2024-09-15</span>
+      </div>
+      <div class="result-row">
+        <span class="result-label">质检结果</span>
+        <span class="status-badge ok">合格</span>
+      </div>
+    </div>
+
+    <div class="result-card" style="animation-delay:0.24s;">
+      <div class="result-card-title">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+        流通信息
+      </div>
+      <div class="result-row">
+        <span class="result-label">经销商</span>
+        <span class="result-value">厦门安防设备贸易有限公司</span>
+      </div>
+      <div class="result-row">
+        <span class="result-label">入库时间</span>
+        <span class="result-value">2024-10-02</span>
+      </div>
+      <div class="result-row">
+        <span class="result-label">查询次数</span>
+        <span class="result-value">首次查询</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 底部 -->
+  <div class="footer">
+    <div class="footer-text">每一次扫码，都是对安全的承诺</div>
+    <div class="footer-brand">福建省国溯科技集团有限公司</div>
+  </div>
+</div>
+
+<script>
+function handleLogin() {
+  const account = document.querySelector('input[placeholder="请输入溯源账号"]').value;
+  const password = document.querySelector('input[placeholder="请输入密码"]').value;
+
+  const section = document.getElementById('resultSection');
+  section.style.display = 'block';
+
+  // 重新触发动画
+  const cards = section.querySelectorAll('.result-card');
+  cards.forEach(card => {
+    card.style.animation = 'none';
+    card.offsetHeight;
+    card.style.animation = '';
+  });
+
+  section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+</script>
+
+</body></html>
