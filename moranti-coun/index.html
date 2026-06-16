@@ -1,0 +1,772 @@
+<html lang="zh-CN"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>更多防伪查验 - 国溯科技</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&amp;family=DM+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-start: #eaf0fb;
+  --bg-end: #f7f9fd;
+  --primary: #2563eb;
+  --primary-dark: #1e40af;
+  --primary-light: #60a5fa;
+  --accent: #3b82f6;
+  --accent-glow: rgba(59,130,246,0.12);
+  --surface: #ffffff;
+  --surface-alt: #f5f8fe;
+  --text-primary: #1a2332;
+  --text-secondary: #5a6b82;
+  --text-muted: #94a3b8;
+  --border: #dbe4f0;
+  --border-light: rgba(219,228,240,0.6);
+  --shadow-sm: 0 1px 4px rgba(37,99,235,0.06);
+  --shadow-md: 0 4px 18px rgba(37,99,235,0.1);
+  --shadow-lg: 0 8px 30px rgba(37,99,235,0.14);
+  --radius: 14px;
+  --radius-sm: 9px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Noto Sans SC', -apple-system, sans-serif;
+  background: linear-gradient(170deg, var(--bg-start) 0%, var(--bg-end) 100%);
+  min-height: 100vh;
+  color: var(--text-primary);
+  position: relative;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 点状纹理 */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(37,99,235,0.04) 1px, transparent 1px);
+  background-size: 20px 20px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 428px;
+  margin: 0 auto;
+  padding: 0 20px;
+  padding-bottom: 40px;
+}
+
+/* 品牌头部 */
+.brand-header {
+  text-align: center;
+  padding: 28px 0 8px;
+}
+
+.brand-icon {
+  width: 44px;
+  height: 44px;
+  margin: 0 auto 10px;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px rgba(37,99,235,0.25);
+  transform: rotate(0deg);
+}
+
+.brand-icon img {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  border-radius: 6px;
+}
+
+.company-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--primary-dark);
+  letter-spacing: 1px;
+}
+
+.brand-slogan {
+  font-size: 12px;
+  color: var(--text-muted);
+  letter-spacing: 2px;
+  font-weight: 300;
+  margin-top: 2px;
+}
+
+.divider {
+  width: 32px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  margin: 12px auto;
+  border-radius: 1px;
+}
+
+/* 页面标题 */
+.page-title {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.page-title h1 {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: 0.5px;
+}
+
+/* Tab 切换 */
+.tab-bar {
+  display: flex;
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 4px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-light);
+  margin-bottom: 16px;
+  position: relative;
+}
+
+.tab-btn {
+  flex: 1;
+  height: 36px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  font-size: 12.5px;
+  font-weight: 500;
+  font-family: inherit;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
+  letter-spacing: 0.3px;
+}
+
+.tab-btn.active {
+  color: var(--primary);
+  background: var(--surface);
+  box-shadow: 0 2px 8px rgba(37,99,235,0.12);
+}
+
+/* Tab 内容 */
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 功能卡片 */
+.func-card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 22px 20px;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border-light);
+  margin-bottom: 12px;
+}
+
+.scan-area {
+  width: 100%;
+  height: 180px;
+  background: var(--surface-alt);
+  border-radius: var(--radius-sm);
+  border: 2px dashed var(--border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 14px;
+  transition: border-color 0.3s ease;
+}
+
+.scan-area:hover {
+  border-color: var(--accent);
+}
+
+.scan-icon {
+  width: 48px;
+  height: 48px;
+  background: rgba(59,130,246,0.08);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scan-icon svg {
+  width: 24px;
+  height: 24px;
+  color: var(--accent);
+}
+
+.scan-text {
+  font-size: 12.5px;
+  color: var(--text-muted);
+}
+
+.scan-corners {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scan-corners::before,
+.scan-corners::after {
+  content: '';
+  position: absolute;
+}
+
+.form-input {
+  width: 100%;
+  height: 40px;
+  padding: 0 14px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-family: inherit;
+  color: var(--text-primary);
+  background: var(--surface-alt);
+  transition: all 0.25s ease;
+  outline: none;
+  margin-bottom: 12px;
+}
+
+.form-input::placeholder {
+  color: var(--text-muted);
+  font-size: 12.5px;
+}
+
+.form-input:focus {
+  border-color: var(--accent);
+  background: #fff;
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+.form-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+
+.btn-primary {
+  width: 100%;
+  height: 42px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: inherit;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 12px rgba(37,99,235,0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+.btn-secondary {
+  width: 100%;
+  height: 38px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--text-secondary);
+  font-size: 12.5px;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+}
+
+.btn-secondary:active {
+  background: var(--surface-alt);
+  border-color: var(--accent);
+  color: var(--primary);
+}
+
+/* 扫码动画 */
+.scan-line {
+  width: 70%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  position: absolute;
+  top: 30%;
+  animation: scanMove 2s ease-in-out infinite;
+  opacity: 0;
+  border-radius: 1px;
+}
+
+.scanning .scan-line {
+  opacity: 1;
+}
+
+@keyframes scanMove {
+  0% { top: 20%; }
+  50% { top: 80%; }
+  100% { top: 20%; }
+}
+
+/* 查询结果 */
+.result-area {
+  display: none;
+}
+
+.result-area.show {
+  display: block;
+  animation: fadeIn 0.4s ease;
+}
+
+.result-card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 16px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-light);
+  margin-top: 12px;
+  opacity: 0;
+  animation: fadeUp 0.5s ease forwards;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.result-card-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.result-card-title .icon-wrap {
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-wrap.blue { background: rgba(59,130,246,0.08); }
+.icon-wrap.green { background: rgba(22,163,74,0.08); }
+.icon-wrap.amber { background: rgba(245,158,11,0.08); }
+
+.icon-wrap svg {
+  width: 12px;
+  height: 12px;
+}
+
+.result-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 0;
+  font-size: 12.5px;
+}
+
+.result-row:not(:last-child) {
+  border-bottom: 1px solid rgba(219,228,240,0.4);
+}
+
+.result-label {
+  color: var(--text-muted);
+}
+
+.result-value {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.status-badge.ok {
+  background: rgba(22,163,74,0.08);
+  color: #16a34a;
+}
+
+.status-badge.warn {
+  background: rgba(245,158,11,0.08);
+  color: #f59e0b;
+}
+
+.status-badge.danger {
+  background: rgba(239,68,68,0.08);
+  color: #ef4444;
+}
+
+/* 结果查询区 */
+.history-item {
+  background: var(--surface);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  border: 1px solid var(--border-light);
+  margin-bottom: 10px;
+  box-shadow: var(--shadow-sm);
+}
+
+.history-time {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+  font-family: 'DM Mono', monospace;
+}
+
+.history-code {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  font-family: 'DM Mono', monospace;
+  margin-bottom: 6px;
+  letter-spacing: 1px;
+}
+
+.history-result {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.history-result-text {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.empty-state {
+  text-align: center;
+  padding: 32px 0;
+}
+
+.empty-icon {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 12px;
+  background: var(--surface-alt);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px dashed var(--border);
+}
+
+.empty-icon svg {
+  width: 20px;
+  height: 20px;
+  color: var(--text-muted);
+}
+
+.empty-text {
+  font-size: 12.5px;
+  color: var(--text-muted);
+}
+
+/* 底部 */
+.footer {
+  text-align: center;
+  padding: 24px 0 16px;
+  position: relative;
+  z-index: 1;
+}
+
+.footer-text {
+  font-size: 10.5px;
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
+  line-height: 1.6;
+}
+
+.footer-brand {
+  font-size: 11px;
+  color: var(--text-secondary);
+  font-weight: 500;
+  margin-top: 4px;
+}
+
+.copyright {
+  font-size: 10px;
+  color: var(--text-muted);
+  margin-top: 6px;
+  letter-spacing: 0.3px;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <!-- 品牌头部 -->
+  <div class="brand-header">
+    <div class="brand-icon">
+      <img src="cptp.png" alt="CPTP Logo" id="companyLogo">
+    </div>
+    <div class="company-name"></div>
+    <div class="brand-slogan"></div>
+    <div class="divider"></div>
+  </div>
+
+  <!-- 页面标题 -->
+  <div class="page-title">
+    <h1>更多防伪查验</h1>
+  </div>
+
+  <!-- Tab 切换栏 -->
+  <div class="tab-bar">
+    <button class="tab-btn active" data-tab="scan" onclick="switchTab('scan', this)">扫码查验</button>
+    <button class="tab-btn" data-tab="manual" onclick="switchTab('manual', this)">手动输入</button>
+    <button class="tab-btn" data-tab="history" onclick="switchTab('history', this)">结果查询</button>
+  </div>
+
+  <!-- Tab 1: 扫码查验 -->
+  <div class="tab-content active" id="tab-scan">
+    <div class="func-card">
+      <div class="scan-area" id="scanArea">
+        <div class="scan-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="7" height="7"></rect>
+            <rect x="14" y="3" width="7" height="7"></rect>
+            <rect x="3" y="14" width="7" height="7"></rect>
+            <path d="M14 14h3v3"></path>
+            <path d="M20 14v3h-3"></path>
+            <path d="M14 20h3v-3"></path>
+            <path d="M20 20v-3h-3"></path>
+          </svg>
+        </div>
+        <div class="scan-text">点击下方按钮启动扫码</div>
+        <div class="scan-line" id="scanLine"></div>
+      </div>
+      <button class="btn-primary" onclick="startScan()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect></svg>
+        开始扫码
+      </button>
+      <div class="result-area" id="scanResult">
+        <div class="result-card" style="animation-delay:0s;">
+          <div class="result-card-title">
+            <span class="icon-wrap green"><svg viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2"><path d="M9 12l2 2 4-4"></path><circle cx="12" cy="12" r="10"></circle></svg></span>
+            扫码结果
+          </div>
+          <div class="result-row">
+            <span class="result-label">防伪码</span>
+            <span class="result-value" style="font-family:'DM Mono',monospace;">GS-8A7F-3C2E-D901</span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">产品名称</span>
+            <span class="result-value">智能安防摄像头 X200</span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">查验状态</span>
+            <span class="status-badge ok">正品验证通过</span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">首次查验</span>
+            <span class="result-value">2024-10-25 14:32</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tab 2: 手动输入 -->
+  <div class="tab-content" id="tab-manual">
+    <div class="func-card">
+      <label class="form-label">防伪码 / 序列号</label>
+      <input class="form-input" type="text" placeholder="请输入防伪码/序列号" id="manualInput">
+      <button class="btn-primary" onclick="verifyCode()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><path d="M21 21l-4.35-4.35"></path></svg>
+        立即查验
+      </button>
+      <div class="result-area" id="manualResult">
+        <div class="result-card" style="animation-delay:0s;">
+          <div class="result-card-title">
+            <span class="icon-wrap green"><svg viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2"><path d="M9 12l2 2 4-4"></path><circle cx="12" cy="12" r="10"></circle></svg></span>
+            查验结果
+          </div>
+          <div class="result-row">
+            <span class="result-label">输入编码</span>
+            <span class="result-value" id="inputCodeDisplay" style="font-family:'DM Mono',monospace;">-</span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">产品信息</span>
+            <span class="result-value">国溯智能路由器 R500</span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">查验状态</span>
+            <span class="status-badge ok" id="verifyStatus">正品验证通过</span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">查验时间</span>
+            <span class="result-value" id="verifyTime">-</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tab 3: 结果查询 -->
+  <div class="tab-content" id="tab-history">
+    <div class="func-card">
+      <div id="historyContent">
+        <!-- 有记录时 -->
+        <div id="historyHasData">
+          <div class="history-item">
+            <div class="history-time">2024-10-25 14:32:08</div>
+            <div class="history-code">GS-8A7F-3C2E-D901</div>
+            <div class="history-result">
+              <span class="status-badge ok">正品</span>
+              <span class="history-result-text">智能安防摄像头 X200</span>
+            </div>
+          </div>
+          <div class="history-item">
+            <div class="history-time">2024-10-24 09:15:42</div>
+            <div class="history-code">GS-F2B1-7D4A-C503</div>
+            <div class="history-result">
+              <span class="status-badge warn">首次查验</span>
+              <span class="history-result-text">国溯锂电池组 XT-48V</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 无记录时 -->
+        <div id="historyEmpty" class="empty-state" style="display:none;">
+          <div class="empty-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+          </div>
+          <div class="empty-text">暂无查验记录</div>
+        </div>
+      </div>
+
+      <button class="btn-secondary" onclick="clearHistory()">清空记录</button>
+    </div>
+  </div>
+
+  <!-- 底部 -->
+  <div class="footer">
+    <div class="footer-text">真伪一扫即知，品质始终如一</div>
+    <div class="footer-brand">福建省国溯科技集团有限公司</div>
+    <div class="copyright">
+</div>
+  </div>
+</div>
+
+<script>
+// Tab 切换
+function switchTab(tabName, btn) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+
+  btn.classList.add('active');
+  document.getElementById('tab-' + tabName).classList.add('active');
+}
+
+// 扫码
+function startScan() {
+  const area = document.getElementById('scanArea');
+  const result = document.getElementById('scanResult');
+
+  area.classList.add('scanning');
+
+  setTimeout(() => {
+    area.classList.remove('scanning');
+    result.classList.add('show');
+
+    const card = result.querySelector('.result-card');
+    card.style.animation = 'none';
+    card.offsetHeight;
+    card.style.animation = '';
+
+    result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }, 1800);
+}
+
+// 手动查验
+function verifyCode() {
+  const input = document.getElementById('manualInput');
+  const result = document.getElementById('manualResult');
+  const code = input.value.trim();
+
+  if (!code) {
+    input.style.borderColor = '#ef4444';
+    setTimeout(() => { input.style.borderColor = ''; }, 1500);
+    return;
+  }
+
+  document.getElementById('inputCodeDisplay').textContent = code;
+
+  const now = new Date();
+  const timeStr = now.getFullYear() + '-' +
+    String(now.getMonth() + 1).padStart(2, '0') + '-' +
+    String(now.getDate()).padStart(2, '0') + ' ' +
+    String(now.getHours()).padStart(2, '0') + ':' +
+    String(now.getMinutes()).padStart(2, '0') + ':' +
+    String(now.getSeconds()).padStart(2, '0');
+  document.getElementById('verifyTime').textContent = timeStr;
+
+  result.classList.add('show');
+
+  const card = result.querySelector('.result-card');
+  card.style.animation = 'none';
+  card.offsetHeight;
+  card.style.animation = '';
+
+  // 保存到 localStorage
+  const history = JSON.parse(localStorage.getItem('gs_history') || '[]');
+  history.unshift({
+    time: timeStr,
+    code: code,
+    product: '国溯智能路由器 R500',
+    status: '正品'
+  });
+  localStorage.setItem('gs_history', JSON.stringify(history.slice(0, 20)));
+}
+
+// 清空记录
+function clearHistory() {
+  document.getElementById('historyHasData').style.display = 'none';
+  document.getElementById('historyEmpty').style.display = 'block';
+  localStorage.removeItem('gs_history');
+}
+
+
+</script>
+
+</body></html>
